@@ -10,15 +10,15 @@
             Spacing="25">
             <!-- Image element -->
             <Image
-                Source="dotnet_bot.png"
-                HeightRequest="185"
+                Source="truthordrink.jpg"
+                HeightRequest="250"
                 Aspect="AspectFit"
                 SemanticProperties.Description="dot net bot in a hovercraft number nine" />
 
             <!-- Title Frame with Label inside -->
             <Border BackgroundColor="LightBlue" Padding="10" Margin="20">
                 <Label
-                Text="Login Screen"
+                Text="Truth or Drink"
                 FontSize="24"
                 HorizontalOptions="Center"
                 VerticalOptions="Center" /> 
@@ -27,6 +27,7 @@
             <!-- Email Entry field -->
             <Entry
                 Placeholder="Email Address"
+                PlaceholderColor="White"
                 Keyboard="Email"
                 Margin="0,10,0,10"
                 TextColor="Black"
@@ -35,6 +36,7 @@
             <!-- Password Entry field -->
             <Entry
                 Placeholder="Password"
+                PlaceholderColor="White"
                 IsPassword="True"
                 Margin="0,10,0,20"
                 TextColor="Black"

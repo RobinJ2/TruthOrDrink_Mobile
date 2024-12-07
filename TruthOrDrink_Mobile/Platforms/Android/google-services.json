@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "241979008065",
+    "project_id": "truthordrink-5409f",
+    "storage_bucket": "truthordrink-5409f.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:241979008065:android:d39b593c9802b3611d12c0",
+        "android_client_info": {
+          "package_name": "TruthOrDrink.RobinTruthOrDrink"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDMDXy3X-2QJUVmPw_0xmPmLhmrfMzLhBY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
