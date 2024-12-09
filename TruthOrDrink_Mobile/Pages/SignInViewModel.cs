@@ -34,20 +34,19 @@ namespace TruthOrDrink_Mobile.Pages
         }
 
         [RelayCommand]
-        private async Task SignIn()
+        public async Task SignIn()
         {
             try
             {
-                await _authClient.SignInWithEmailAndPasswordAsync(Email, Password);
-
-                if (_authClient.User != null)
-                {
-                    await Shell.Current.GoToAsync(nameof(HomePage));
-                }
+                var user = await _authClient.SignInWithEmailAndPasswordAsync(Email, Password);
+                Console.WriteLine($"[WTF] Ingelogde gebruiker: {user.User.Info.Email}");
+                Shell.Current.FlyoutBehavior = FlyoutBehavior.Flyout;
+                (Application.Current.MainPage as AppShell)?.UpdateShellItems(true);
+                await Shell.Current.GoToAsync("//HomePage");
             }
             catch (Exception ex)
             {
-                await Application.Current.MainPage.DisplayAlert("Login Fout", $"Er is iets misgegaan: {ex.Message}", "OK");
+                Console.WriteLine($"[WTF] Fout tijdens inloggen: {ex.Message}");
             }
         }
 

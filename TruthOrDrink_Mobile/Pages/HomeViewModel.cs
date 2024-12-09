@@ -29,20 +29,10 @@ namespace TruthOrDrink_Mobile.Pages
         [RelayCommand]
         private async Task Logout()
         {
-            try
-            {
-                _authClient.SignOut();
+            _authClient.SignOut();
 
-                // Navigeren naar de loginpagina
-                var appShell = (AppShell)Shell.Current;
-                appShell.SetShellItemsVisibility(false);
-
-                await Shell.Current.GoToAsync(nameof(SignInView));
-            }
-            catch (Exception ex)
-            {
-                await Application.Current.MainPage.DisplayAlert("Fout", $"Er is iets misgegaan tijdens het uitloggen: {ex.Message}", "OK");
-            }
+            // Ga terug naar de inlogpagina
+            await Shell.Current.GoToAsync("//SignIn");
         }
     }
 }

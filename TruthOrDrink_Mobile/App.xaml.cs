@@ -1,5 +1,4 @@
 ﻿using Firebase.Auth;
-using TruthOrDrink_Mobile.Pages;
 
 namespace TruthOrDrink_Mobile
 {
@@ -10,22 +9,36 @@ namespace TruthOrDrink_Mobile
         public App(AppShell appShell, FirebaseAuthClient authClient)
         {
             InitializeComponent();
-
             _authClient = authClient;
 
-            // Stel MainPage in voordat je Shell.Current gebruikt
+            // Instellen van de startpagina van de app
             MainPage = appShell;
+            NavigateToInitialPage();
+        }
 
-            // Controleer de loginstatus na het instellen van MainPage
-            if (_authClient.User != null)
+        private async void NavigateToInitialPage()
+        {
+            try
             {
-                appShell.SetShellItemsVisibility(true);
-                Shell.Current.GoToAsync(nameof(HomePage));
+                // Controleer of de gebruiker daadwerkelijk is ingelogd
+                var currentUser = _authClient.User;
+
+                if (currentUser != null && currentUser.Info.IsEmailVerified) // Controleer ook op e-mailverificatie
+                {
+                    Shell.Current.FlyoutBehavior = FlyoutBehavior.Flyout;
+                    (MainPage as AppShell)?.UpdateShellItems(true);
+                    await Shell.Current.GoToAsync("HomePage");
+                }
+                else
+                {
+                    Shell.Current.FlyoutBehavior = FlyoutBehavior.Disabled;
+                    (MainPage as AppShell)?.UpdateShellItems(false);
+                    await Shell.Current.GoToAsync("SignIn");
+                }
             }
-            else
+            catch (Exception ex)
             {
-                appShell.SetShellItemsVisibility(false);
-                //Shell.Current.GoToAsync(nameof(SignInView));
+                Console.WriteLine($"[WTF] Fout tijdens navigatie: {ex.Message}");
             }
         }
     }
