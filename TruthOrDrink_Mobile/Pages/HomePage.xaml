@@ -3,15 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:mct="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
              x:Class="TruthOrDrink_Mobile.Pages.HomePage"
-             Shell.NavBarIsVisible="False"
-             
+             Shell.NavBarIsVisible="True"
              Title="">
 
     <Page.Behaviors>
-        <mct:StatusBarBehavior StatusBarColor="Transparent"/>
+        <mct:StatusBarBehavior StatusBarColor="Black"/>
     </Page.Behaviors>
 
-    <ContentPage.Background>
+    <ContentPage.Background >
         <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
             <!-- Definieer de verloopkleuren -->
             <GradientStop Color="#2E005B" Offset="0.0" />

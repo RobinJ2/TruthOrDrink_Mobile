@@ -24,7 +24,7 @@ namespace TruthOrDrink_Mobile.Pages
             if (_authClient.User != null)
             {
                 // Gebruiker is al ingelogd, navigeren naar HomePage
-                Shell.Current.GoToAsync("HomePage");
+                Shell.Current.GoToAsync("//HomePage");
             }
         }
 
@@ -38,7 +38,7 @@ namespace TruthOrDrink_Mobile.Pages
                 Shell.Current.FlyoutBehavior = FlyoutBehavior.Flyout;
                 (Application.Current.MainPage as AppShell)?.UpdateShellItems(true);
 
-                await Shell.Current.GoToAsync("HomePage");
+                await Shell.Current.GoToAsync("//HomePage");
             }
             catch (Exception ex)
             {

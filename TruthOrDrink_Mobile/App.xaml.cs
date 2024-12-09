@@ -5,38 +5,32 @@ namespace TruthOrDrink_Mobile
     public partial class App : Application
     {
         private readonly FirebaseAuthClient _authClient;
+        private readonly IServiceProvider _serviceProvider;
 
-        public App(AppShell appShell, FirebaseAuthClient authClient)
+        public App(FirebaseAuthClient authClient, IServiceProvider serviceProvider)
         {
             InitializeComponent();
             _authClient = authClient;
-
-            // Instellen van de startpagina van de app
-            MainPage = appShell;
-            NavigateToInitialPage();
+            _serviceProvider = serviceProvider;
         }
 
-        private async void NavigateToInitialPage()
+        protected override Window CreateWindow(IActivationState activationState)
         {
-            try
-            {
-                var currentUser = _authClient?.User;
+            var appShell = _serviceProvider.GetRequiredService<AppShell>();
 
-                if (currentUser == null || !currentUser.Info?.IsEmailVerified == true)
-                {
-                    // Geen gebruiker: ga naar de inlogpagina
-                    await Shell.Current.GoToAsync("SignIn");
-                }
-                else
-                {
-                    // Ingelogde gebruiker: ga naar de tabs (homepagina)
-                    await Shell.Current.GoToAsync("HomePage");
-                }
-            }
-            catch (Exception ex)
+            var currentUser = _authClient?.User;
+
+            // Controleer de inlogstatus en stel de juiste startpagina in
+            if (currentUser == null || !currentUser.Info?.IsEmailVerified == true)
             {
-                Console.WriteLine($"[ERROR] Fout tijdens navigatie: {ex.Message}");
+                appShell.GoToAsync("//SignIn");
             }
+            else
+            {
+                appShell.GoToAsync("//HomePage");
+            }
+
+            return new Window(appShell);
         }
     }
 }
