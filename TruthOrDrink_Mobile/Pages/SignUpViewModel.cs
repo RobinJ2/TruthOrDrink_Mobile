@@ -1,11 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Firebase.Auth;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TruthOrDrink_Mobile.Pages
 {
@@ -30,9 +25,15 @@ namespace TruthOrDrink_Mobile.Pages
         [RelayCommand]
         private async Task SignUp()
         {
-            await _authClient.CreateUserWithEmailAndPasswordAsync(Email, Password, Username);
-            
-            await Shell.Current.GoToAsync("//SignIn");
+            try
+            {
+                await _authClient.CreateUserWithEmailAndPasswordAsync(Email, Password, Username);
+                await Shell.Current.GoToAsync("//SignIn");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Fout tijdens registratie: {ex.Message}");
+            }
         }
 
         [RelayCommand]

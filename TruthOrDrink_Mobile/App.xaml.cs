@@ -20,25 +20,22 @@ namespace TruthOrDrink_Mobile
         {
             try
             {
-                // Controleer of de gebruiker daadwerkelijk is ingelogd
-                var currentUser = _authClient.User;
+                var currentUser = _authClient?.User;
 
-                if (currentUser != null && currentUser.Info.IsEmailVerified) // Controleer ook op e-mailverificatie
+                if (currentUser == null || !currentUser.Info?.IsEmailVerified == true)
                 {
-                    Shell.Current.FlyoutBehavior = FlyoutBehavior.Flyout;
-                    (MainPage as AppShell)?.UpdateShellItems(true);
-                    await Shell.Current.GoToAsync("HomePage");
+                    // Geen gebruiker: ga naar de inlogpagina
+                    await Shell.Current.GoToAsync("SignIn");
                 }
                 else
                 {
-                    Shell.Current.FlyoutBehavior = FlyoutBehavior.Disabled;
-                    (MainPage as AppShell)?.UpdateShellItems(false);
-                    await Shell.Current.GoToAsync("SignIn");
+                    // Ingelogde gebruiker: ga naar de tabs (homepagina)
+                    await Shell.Current.GoToAsync("HomePage");
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"[WTF] Fout tijdens navigatie: {ex.Message}");
+                Console.WriteLine($"[ERROR] Fout tijdens navigatie: {ex.Message}");
             }
         }
     }

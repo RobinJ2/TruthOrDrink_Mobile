@@ -3,41 +3,46 @@
     x:Class="TruthOrDrink_Mobile.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:pages="clr-namespace:TruthOrDrink_Mobile.Pages"
-    FlyoutBehavior="Flyout">
+    xmlns:pages="clr-namespace:TruthOrDrink_Mobile.Pages">
 
+    
     <ShellContent
         Title="Sign In"
         ContentTemplate="{DataTemplate pages:SignInView}"
-        Route="SignIn" 
-        IsVisible="True"
-        FlyoutItemIsVisible="True"/>
-
+        Route="SignIn"/> 
+        
     <ShellContent
         Title="Sign Up"
         ContentTemplate="{DataTemplate pages:SignUpView}"
-        Route="SignUp" 
-        IsVisible="True"
-        FlyoutItemIsVisible="True"/>
+        Route="SignUp" />
+        
 
-    <ShellContent
+    <!--<ShellContent
         ContentTemplate="{DataTemplate pages:HomePage}"
         Route="HomePage" 
         x:Name="homePageShellContent"
         IsVisible="False"
-        FlyoutItemIsVisible="True"/>
+        FlyoutItemIsVisible="True"/>-->
 
-    <!--<FlyoutItem Title="Menu">
-        <ShellContent
-            Title="Home"
-            ContentTemplate="{DataTemplate pages:HomePage}"
-            FlyoutItemIsVisible="True"/>
-        
-    </FlyoutItem>-->
 
-    <MenuItem
-        Text="Uitloggen"
-        Command="{Binding LogoutCommand}"
-        />
 
+    <TabBar>
+        <Tab Title="Home" Icon="home_icon.png" Route="HomePage">
+            <ShellContent
+                Title="Home"
+                ContentTemplate="{DataTemplate pages:HomePage}" />
+        </Tab>
+
+        <Tab Title="Vragen Beheren" Icon="questions_icon.png" Route="ManageQuestionsPage">
+            <ShellContent
+                Title="Vragen Beheren"
+                ContentTemplate="{DataTemplate pages:ManageQuestionsPage}" />
+        </Tab>
+
+        <Tab Title="Instellingen" Icon="settings_icon.png" Route="SettingsPage">
+            <ShellContent
+                Title="Instellingen"
+                ContentTemplate="{DataTemplate pages:SettingsPage}" />
+        </Tab>
+    </TabBar>
 </Shell>

@@ -21,7 +21,7 @@
         </LinearGradientBrush>
     </ContentPage.Background>
 
-    <VerticalStackLayout Padding="30" Spacing="20">
+    <VerticalStackLayout Padding="50" Spacing="20">
         
         <Label Text="Truth Or Drink" 
                FontSize="38" 
@@ -33,5 +33,12 @@
                FontSize="Medium"
                HorizontalOptions="Center" 
                TextColor="White"/>
+        <Button Text="Uitloggen"
+                BackgroundColor="Red"
+                TextColor="White"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                Command="{Binding LogoutCommand}"/>
+            
     </VerticalStackLayout>
 </ContentPage>

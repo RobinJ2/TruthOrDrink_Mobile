@@ -33,8 +33,8 @@ namespace TruthOrDrink_Mobile
                 Providers = new FirebaseAuthProvider[] 
                     { 
                         new EmailProvider() 
-                    }, 
-                UserRepository = new FileUserRepository("LogInf"), 
+                    },
+                UserRepository = new FileUserRepository("LogInf"),
             }));
             builder.Services.AddSingleton<SignInView>();
             builder.Services.AddSingleton<SignInViewModel>();

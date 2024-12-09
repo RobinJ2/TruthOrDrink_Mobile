@@ -1,11 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Firebase.Auth;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TruthOrDrink_Mobile.Pages
 {
@@ -29,7 +24,7 @@ namespace TruthOrDrink_Mobile.Pages
             if (_authClient.User != null)
             {
                 // Gebruiker is al ingelogd, navigeren naar HomePage
-                Shell.Current.GoToAsync("//HomePage");
+                Shell.Current.GoToAsync("HomePage");
             }
         }
 
@@ -39,20 +34,22 @@ namespace TruthOrDrink_Mobile.Pages
             try
             {
                 var user = await _authClient.SignInWithEmailAndPasswordAsync(Email, Password);
-                Console.WriteLine($"[WTF] Ingelogde gebruiker: {user.User.Info.Email}");
+
                 Shell.Current.FlyoutBehavior = FlyoutBehavior.Flyout;
                 (Application.Current.MainPage as AppShell)?.UpdateShellItems(true);
-                await Shell.Current.GoToAsync("//HomePage");
+
+                await Shell.Current.GoToAsync("HomePage");
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"[WTF] Fout tijdens inloggen: {ex.Message}");
+                await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
             }
         }
 
         [RelayCommand]
         private async Task NavigateSignUp()
         {
+            // Navigeer naar SignUpView
             await Shell.Current.GoToAsync(nameof(SignUpView));
         }
     }

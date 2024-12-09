@@ -6,13 +6,15 @@ namespace TruthOrDrink_Mobile
     {
         public AppShell(HomeViewModel homeViewModel)
         {
+
             InitializeComponent();
             BindingContext = homeViewModel;
 
-            // Registreer routes
             Routing.RegisterRoute("HomePage", typeof(Pages.HomePage));
             Routing.RegisterRoute("SignInView", typeof(Pages.SignInView));
             Routing.RegisterRoute("SignUpView", typeof(Pages.SignUpView));
+            Routing.RegisterRoute("ManageQuestionsPage", typeof(Pages.ManageQuestionsPage));
+            Routing.RegisterRoute("SettingsPage", typeof(Pages.SettingsPage));
         }
 
         public void SetShellItemsVisibility(bool isAuthenticated)
@@ -32,28 +34,12 @@ namespace TruthOrDrink_Mobile
 
         public void UpdateShellItems(bool isAuthenticated)
         {
-            Console.WriteLine($"[WTF] UpdateShellItems aangeroepen: {isAuthenticated}");
-            
-
             // Verander de zichtbaarheid van items
             var homePageShellContent = this.FindByName<ShellContent>("homePageShellContent");
             if (homePageShellContent != null)
             {
-                Console.WriteLine("[WTF] homePageShellContent gevonden.");
                 homePageShellContent.IsVisible = isAuthenticated;
             }
-            else
-            {
-                Console.WriteLine("[WTF] homePageShellContent niet gevonden! Controleer de naam in de XAML.");
-            }
-
-            Console.WriteLine("[WTF] Controleer Items in AppShell:");
-            foreach (var item in Items)
-            {
-                Console.WriteLine($"[WTF] Item: {item.Route}, IsVisible: {item.IsVisible}");
-            }
-
-            FlyoutBehavior = isAuthenticated ? FlyoutBehavior.Flyout : FlyoutBehavior.Disabled;
 
         }
     }
