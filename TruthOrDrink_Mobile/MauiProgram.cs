@@ -42,6 +42,7 @@ namespace TruthOrDrink_Mobile
             builder.Services.AddSingleton<SignUpViewModel>();
             builder.Services.AddSingleton<HomePage>();
             builder.Services.AddSingleton<HomeViewModel>();
+            builder.UseMauiApp<App>().UseMauiCommunityToolkit();
 
             return builder.Build();
         }

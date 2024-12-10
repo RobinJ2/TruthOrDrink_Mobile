@@ -2,12 +2,32 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TruthOrDrink_Mobile.Pages.SettingsPage"
-             Title="Instellingen">
+             Title="">
+
+    <ContentPage.Background >
+        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+            <!-- Definieer de verloopkleuren -->
+            <GradientStop Color="#2E005B" Offset="0.0" />
+            <!-- Donkerblauw boven -->
+            <GradientStop Color="#9B4EFF" Offset="1.0" />
+            <!-- Paars onder -->
+        </LinearGradientBrush>
+    </ContentPage.Background>
+    
     <VerticalStackLayout>
-        <Label 
-            Text="Instellingen"
-            FontSize="24"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+
+        <Label Text="Instellingen" 
+                FontSize="38" 
+                HorizontalOptions="Center" 
+                Margin="0, 20, 0, 20" 
+                TextColor="White"/>
+
+        <Button Text="Uitloggen"
+                BackgroundColor="Red"
+                TextColor="White"
+                ImageSource="logout_icon.png"
+                WidthRequest="150"
+                HeightRequest="50"
+                Command="{Binding LogoutCommand}" />
     </VerticalStackLayout>
 </ContentPage>

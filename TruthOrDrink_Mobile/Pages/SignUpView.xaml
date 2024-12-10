@@ -1,13 +1,96 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:mct="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
              x:Class="TruthOrDrink_Mobile.Pages.SignUpView"
-             Title="Sign Up">
-    <VerticalStackLayout>
-        <Entry Text="{Binding Email}" />
-        <Entry Text="{Binding Username}"/>
-        <Entry IsPassword="True" Text="{Binding Password}"/>
-        <Button Text="Sign Up" Command="{Binding SignUpCommand}" />
-        <Button Command="{Binding NavigateSignInCommand}" Text="Al een account? Login" />
+             Title=""
+             BackgroundColor="Transparent"
+             Shell.NavBarIsVisible="False">
+
+    <Page.Behaviors>
+        <mct:StatusBarBehavior StatusBarColor="Transparent"/>
+    </Page.Behaviors>
+
+    <ContentPage.Background>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+            <!-- Definieer de verloopkleuren -->
+            <GradientStop Color="#2E005B" Offset="0.0" />
+            <!-- Donkerblauw boven -->
+            <GradientStop Color="#9B4EFF" Offset="1.0" />
+            <!-- Paars onder -->
+        </LinearGradientBrush>
+    </ContentPage.Background>
+
+    <VerticalStackLayout Padding="30" Spacing="5" VerticalOptions="FillAndExpand">
+       
+        <Label Text="Account aanmaken"
+               FontSize="24"
+               TextColor="White"
+               FontAttributes="Bold" 
+               Margin="0,70,0,40" />
+
+        <!-- Velden voor registratie -->
+        <Label Text="E-mail"
+               TextColor="White"
+               FontSize="16" />
+        <Entry Placeholder="E-mail"
+               Text="{Binding Email}"
+               Keyboard="Email"
+               Margin="0,0,0,0" />
+        <Label Text="{Binding EmailError}"
+               TextColor="Red"
+               FontSize="12"
+               IsVisible="{Binding EmailError, Converter={StaticResource StringNotEmptyConverter}}" 
+               Margin="0,0,0,10"/>
+
+        <Label Text="Gebruikersnaam"
+               TextColor="White"
+               FontSize="16" />
+        <Entry Placeholder="Gebruikersnaam"
+               Text="{Binding Username}"
+               Margin="0,0,0,0" />
+        <Label Text="{Binding UsernameError}"
+               TextColor="Red"
+               FontSize="12"
+               IsVisible="{Binding UsernameError, Converter={StaticResource StringNotEmptyConverter}}" />
+
+        <Label Text="Wachtwoord"
+               TextColor="White"
+               FontSize="16" />
+        <Entry Placeholder="Wachtwoord"
+               Text="{Binding Password}"
+               IsPassword="True"
+               Margin="0,0,0,0" />
+        <Label Text="{Binding PasswordError}"
+               TextColor="Red"
+               FontSize="12"
+               IsVisible="{Binding PasswordError, Converter={StaticResource StringNotEmptyConverter}}" 
+               Margin="0,0,0,20"/>
+
+        <Label Text="Bevestig Wachtwoord"
+               TextColor="White"
+               FontSize="16" 
+               Margin="0,0,0,0"/>
+        <Entry Text="{Binding ConfirmPassword}"
+               Placeholder="Bevestig Wachtwoord"
+               IsPassword="True" />
+        <Label Text="{Binding ConfirmPasswordError}"
+               TextColor="Red"
+               FontSize="12"
+               IsVisible="{Binding ConfirmPasswordError, Converter={StaticResource StringNotEmptyConverter}}" 
+               Margin="0,0,0,30"/>
+
+        <!-- Knoppen -->
+        <Button Text="Account aanmaken"
+                Command="{Binding SignUpCommand}"
+                BackgroundColor="DodgerBlue"
+                TextColor="White"
+                Margin="0,0,0,0" />
+
+        <Button Text="Al een account? Login"
+                Command="{Binding NavigateSignInCommand}"
+                BackgroundColor="LightGray"
+                TextColor="Black"
+                Margin="0,10,0,0" />
     </VerticalStackLayout>
 </ContentPage>

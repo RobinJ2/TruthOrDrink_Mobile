@@ -22,48 +22,55 @@
     </ContentPage.Background>
 
     <VerticalStackLayout Padding="30" Spacing="15" VerticalOptions="FillAndExpand">
-        <Frame BorderColor="#ADD8E6"
-                    BackgroundColor="Transparent"
-                    Padding="0"
-                    CornerRadius="20"
-                    HorizontalOptions="Center"
-                    VerticalOptions="Start"
-                    Margin="0,30,10,60">
+        <Border BackgroundColor="Transparent"
+                Stroke="#ADD8E6"
+                StrokeThickness="2"
+                StrokeShape="RoundRectangle 10"
+                Margin="0,50,0,30">
             <Label Text="Welkom bij 
-                   Truth Or Drink!"
-                   FontSize="34"
+                   Truth Or Drink"
+                   FontAttributes="Bold"
+                   FontSize="38"
+                   TextColor="White"
                    HorizontalTextAlignment="Center"
-                   TextColor="White"
-                   Margin="0,20,0,25"
-                   FontAttributes="Bold" />
-        </Frame>
+                   Padding="0,20,0,20"/>
+        </Border>
 
-        <Label Text="Inloggen"
-                   FontSize="24"
-                   TextColor="White"
-                   FontAttributes="Bold" 
-                   Margin="0,20,0,10" />
+        <Label  Text="Inloggen"
+                FontSize="24"
+                TextColor="White"
+                FontAttributes="Bold" 
+                Margin="0,20,0,10" />
 
-        <Entry Placeholder="E-mail"
-                   Text="{Binding Email}"
-                   Keyboard="Email"
-                   Margin="0,10,0,0" />
+        <Entry  Placeholder="E-mail"
+                Text="{Binding Email}"
+                Keyboard="Email"
+                Margin="0,10,0,0" />
+        <Label Text="{Binding EmailError}"
+               FontSize="12"
+               TextColor="Red"
+               IsVisible="{Binding EmailError, Converter={StaticResource NullToBooleanConverter}}" />
 
-        <Entry Placeholder="Wachtwoord"
-                   Text="{Binding Password}"
-                   IsPassword="True"
-                   Margin="0,10,0,10" />
+
+        <Entry  Placeholder="Wachtwoord"
+                Text="{Binding Password}"
+                IsPassword="True"
+                Margin="0,10,0,10" />
+        <Label Text="{Binding PasswordError}"
+               FontSize="12"
+               TextColor="Red"
+               IsVisible="{Binding PasswordError, Converter={StaticResource NullToBooleanConverter}}" />
 
         <Button Text="Inloggen"
-                    Command="{Binding SignInCommand}"
-                    BackgroundColor="Blue"
-                    TextColor="White"
-                    Margin="0,10,0,0" />
+                Command="{Binding SignInCommand}"
+                BackgroundColor="DodgerBlue"
+                TextColor="White"
+                Margin="0,10,0,0" />
 
         <Button Text="Registreren"
-                    Command="{Binding NavigateSignUpCommand}"
-                    BackgroundColor="LightGray"
-                    TextColor="Black"
-                    Margin="0,10,0,0" />
+                Command="{Binding NavigateSignUpCommand}"
+                BackgroundColor="LightGray"
+                TextColor="Black"
+                Margin="0,10,0,0" />
     </VerticalStackLayout>
 </ContentPage>

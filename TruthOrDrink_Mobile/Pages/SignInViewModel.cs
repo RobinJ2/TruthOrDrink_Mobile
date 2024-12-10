@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Firebase.Auth;
+using System.Text.RegularExpressions;
 
 namespace TruthOrDrink_Mobile.Pages
 {
@@ -13,6 +14,12 @@ namespace TruthOrDrink_Mobile.Pages
 
         [ObservableProperty]
         private string _password;
+
+        [ObservableProperty]
+        private string _emailError; // Voor validatiebericht
+
+        [ObservableProperty]
+        private string _passwordError; // Voor validatiebericht
 
         public string Username => _authClient.User?.Info?.DisplayName;
 
@@ -31,6 +38,12 @@ namespace TruthOrDrink_Mobile.Pages
         [RelayCommand]
         public async Task SignIn()
         {
+            // Valideer invoer
+            if (!ValidateInputs())
+            
+                return;
+            
+
             try
             {
                 var user = await _authClient.SignInWithEmailAndPasswordAsync(Email, Password);
@@ -42,7 +55,10 @@ namespace TruthOrDrink_Mobile.Pages
             }
             catch (Exception ex)
             {
-                await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
+                // Toon foutbericht als inloggen mislukt
+                //await Application.Current.MainPage.DisplayAlert("Error", "E-mail of wachtwoord is onjuist.", "OK");
+                PasswordError = "Wachtwoord is onjuist.";
+                EmailError = "E-mail of wachtwoord is onjuist.";
             }
         }
 
@@ -51,6 +67,40 @@ namespace TruthOrDrink_Mobile.Pages
         {
             // Navigeer naar SignUpView
             await Shell.Current.GoToAsync(nameof(SignUpView));
+        }
+
+        private bool ValidateInputs()
+        {
+            bool isValid = true;
+
+            // Validatie voor e-mail
+            if (string.IsNullOrWhiteSpace(Email))
+            {
+                EmailError = "E-mail mag niet leeg zijn.";
+                isValid = false;
+            }
+            else if (!Regex.IsMatch(Email, @"^[^@\s]+@[^@\s]+\.[^@\s]+$"))
+            {
+                EmailError = "E-mail is niet geldig.";
+                isValid = false;
+            }
+            else
+            {
+                EmailError = null;
+            }
+
+            // Validatie voor wachtwoord
+            if (string.IsNullOrWhiteSpace(Password))
+            {
+                PasswordError = "Wachtwoord mag niet leeg zijn.";
+                isValid = false;
+            }
+            else
+            {
+                PasswordError = null;
+            }
+
+            return isValid;
         }
     }
 }

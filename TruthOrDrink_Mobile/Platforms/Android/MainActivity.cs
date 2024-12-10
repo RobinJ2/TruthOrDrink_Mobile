@@ -13,11 +13,13 @@ namespace TruthOrDrink_Mobile
             base.OnCreate(savedInstanceState);
 
             // Zorg ervoor dat de content zich uitstrekt onder de status- en navigatiebalk
-            Window.SetDecorFitsSystemWindows(false);
+            //Window.SetDecorFitsSystemWindows(false); ??????????
 
             // Maak statusbalk en navigatiebalk doorzichtig
-            Window.SetStatusBarColor(Android.Graphics.Color.Transparent);
-            Window.SetNavigationBarColor(Android.Graphics.Color.Transparent);
+            //Window.SetStatusBarColor(Android.Graphics.Color.Purple);
+            //Window.SetNavigationBarColor(Android.Graphics.Color.Transparent);
+
+            Window.SetNavigationBarColor(Android.Graphics.Color.Black); // tijdelijke oplossing voor style onderste navbar (is obsolete vanaf android 35)
         }
     }
 }
