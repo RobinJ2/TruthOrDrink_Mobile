@@ -45,4 +45,18 @@
         Icon="settings_icon.png"
         />
 
+    <ShellContent
+        Title="StartGamePage"
+        ContentTemplate="{DataTemplate pages:StartGamePage}"
+        Route="StartGamePage" 
+        FlyoutItemIsVisible="False"
+        />
+
+    <ShellContent
+        Title="DronkenMeter"
+        ContentTemplate="{DataTemplate pages:DrunkMeterPage}"
+        Route="DrunkMeterPage"
+        Icon="drunk_meter_icon.png"
+        />
+
 </Shell>

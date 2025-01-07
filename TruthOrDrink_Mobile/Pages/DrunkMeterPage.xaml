@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TruthOrDrink_Mobile.Pages.DrunkMeterPage"
+             xmlns:local="clr-namespace:TruthOrDrink_Mobile.Pages"
+             Title="">
+
+    <ContentPage.Background>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+            <GradientStop Color="#2E005B" Offset="0.0" />
+            <GradientStop Color="#9B4EFF" Offset="1.0" />
+        </LinearGradientBrush>
+    </ContentPage.Background>
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15">
+            <Label Text="Dronken Meter"
+                   FontSize="32"
+                   FontAttributes="Bold"
+                   TextColor="White"
+                   HorizontalOptions="Center" />
+
+            <!-- Telefoon Stilhouden Test -->
+            <Border BackgroundColor="Transparent" Padding="15" StrokeShape="RoundRectangle 10" Margin="0,0,0,20">
+                <VerticalStackLayout>
+                    <Label Text="Hoe stil kun je je telefoon houden?"
+                           FontSize="16"
+                           TextColor="White" 
+                           Margin="0,0,0,20"/>
+                    <Button Text="Start Test"
+                            Command="{Binding StartAccelerometerTestCommand}" 
+                            Margin="0,0,0,20"/>
+                    <Label Text="{Binding StabilityMessage}"
+                           FontSize="14"
+                           TextColor="LightGray"
+                           HorizontalOptions="Center" />
+                    <!-- Nieuwe Label voor Dronken Score -->
+                    <Label Text="{Binding DrunkScoreMessage}"
+                           FontSize="16"
+                           FontAttributes="Bold"
+                           TextColor="White"
+                           HorizontalOptions="Center"
+                           Margin="0,10,0,0"/>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Foto maken -->
+            <Border BackgroundColor="Transparent" Padding="15" StrokeShape="RoundRectangle 10">
+                <VerticalStackLayout>
+                    <Label Text="Neem een selfie!"
+                           FontSize="16"
+                           TextColor="White" 
+                           Margin="0,0,0,20"/>
+                    <Button Text="Foto maken"
+                            Command="{Binding TakePhotoCommand}" />
+                    <CollectionView ItemsSource="{Binding Photos}"
+                                    Margin="10">
+                        <CollectionView.ItemsLayout>
+                            <GridItemsLayout Orientation="Vertical" Span="2" />
+                        </CollectionView.ItemsLayout>
+                        
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid ColumnDefinitions="*,Auto">
+                                    <!-- Foto -->
+                                    <Image Source="{Binding FilePath}"
+                                           HeightRequest="150"
+                                           WidthRequest="150"
+                                           Aspect="AspectFill">
+                                        <Image.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type local:DrunkMeterViewModel}}, Path=ShowPhotoCommand}"
+                                                CommandParameter="{Binding FilePath}" />
+                                        </Image.GestureRecognizers>
+                                    </Image>
+
+                                    <!-- Delete-icoon -->
+                                    <Image Source="delete_icon.png"
+                                           HeightRequest="25"
+                                           WidthRequest="25"
+                                           VerticalOptions="Start"
+                                           HorizontalOptions="End"
+                                           Margin="5">
+                                        <Image.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type local:DrunkMeterViewModel}}, Path=DeletePhotoCommand}"
+                                              CommandParameter="{Binding}" />
+                                        </Image.GestureRecognizers>
+                                    </Image>
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
+            </Border>
+            <Label Text="Random zen quotes: "
+                   FontSize="20"
+                   TextColor="LightSkyBlue"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"
+                   Margin="0,50,0,0" />
+            <Border BackgroundColor="Transparent" Padding="15" StrokeShape="RoundRectangle 10">
+                <Label Text="{Binding CurrentQuote}" 
+                   FontSize="16" 
+                   TextColor="White" 
+                   HorizontalOptions="Center" 
+                   VerticalOptions="EndAndExpand" 
+                   Margin="10" 
+                   LineBreakMode="WordWrap"
+                   FontAttributes="Italic" />
+            </Border>
+        </VerticalStackLayout>
+        
+    </ScrollView>
+</ContentPage>

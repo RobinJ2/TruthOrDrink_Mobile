@@ -15,6 +15,8 @@ namespace TruthOrDrink_Mobile
             Routing.RegisterRoute("SignUpView", typeof(Pages.SignUpView));
             Routing.RegisterRoute("ManageQuestionsPage", typeof(Pages.ManageQuestionsPage));
             Routing.RegisterRoute("SettingsPage", typeof(Pages.SettingsPage));
+            Routing.RegisterRoute("StartGamePage", typeof(Pages.StartGamePage));
+            Routing.RegisterRoute("DrunkMeterPage", typeof(Pages.DrunkMeterPage));
         }
 
         public void SetShellItemsVisibility(bool isAuthenticated)

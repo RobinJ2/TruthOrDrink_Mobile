@@ -11,6 +11,7 @@
             </ResourceDictionary.MergedDictionaries>
             <local:StringNotEmptyConverter x:Key="StringNotEmptyConverter" />
             <local:NullToBooleanConverter x:Key="NullToBooleanConverter" />
+            <local:BoolToColorConverter1 x:Key="BoolToColorConverter1"/>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

@@ -29,5 +29,12 @@ namespace TruthOrDrink_Mobile.Pages
             // Ga terug naar de inlogpagina
             await Shell.Current.GoToAsync("//SignIn");
         }
+
+        [RelayCommand]
+        public async Task StartGame()
+        {
+            // Navigeer naar de SpelStartenPage
+            await Shell.Current.GoToAsync(nameof(StartGamePage));
+        }
     }
 }

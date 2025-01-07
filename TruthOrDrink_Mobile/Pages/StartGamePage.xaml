@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:mct="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
+             x:Class="TruthOrDrink_Mobile.Pages.StartGamePage"
+             Shell.NavBarIsVisible="True"
+             Title="">
+
+    <Page.Behaviors>
+        <mct:StatusBarBehavior StatusBarColor="Black"/>
+    </Page.Behaviors>
+
+    <ContentPage.Background>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+            <GradientStop Color="#2E005B" Offset="0.0" />
+            <GradientStop Color="#9B4EFF" Offset="1.0" />
+        </LinearGradientBrush>
+    </ContentPage.Background>
+    
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15">
+            
+            <Border     BackgroundColor="Transparent"
+                        Stroke="#ADD8E6"
+                        StrokeThickness="2"
+                        StrokeShape="RoundRectangle 10"
+                        Margin="0,-20,0,0">
+                <Label     Text="Truth Or Drink"
+                           FontAttributes="Bold"
+                           FontSize="38"
+                           TextColor="White"
+                           HorizontalTextAlignment="Center"
+                           Padding="0,20,0,20"/>
+            </Border>
+
+            <!-- Selecteer categorie -->
+            <Label     Text="Selecteer categorie:"
+                       FontSize="16"
+                       FontAttributes="Bold"
+                       Margin="0,0,0,0"
+                       TextColor="White"/>
+            
+            <Picker     Title="Categorie"
+                        ItemsSource="{Binding Categories}"
+                        SelectedItem="{Binding SelectedCategory}"
+                        TextColor="Black"
+                        BackgroundColor="MediumPurple" 
+                        HeightRequest="40"
+                        Margin="0,-5,0,10"/>
+
+            <!-- Selecteer gewaagdheidsniveau -->
+            <Label     Text="Selecteer gewaagdheid:"
+                       FontSize="16"
+                       FontAttributes="Bold"
+                       TextColor="White"/>
+            
+            <Slider     Minimum="1" Maximum="5"
+                        Value="{Binding SelectedGewaagdheid}"
+                        ThumbColor="White"
+                        MinimumTrackColor="DodgerBlue"
+                        MaximumTrackColor="LightGray"/>
+            
+            <Label     Text="{Binding SelectedGewaagdheid, StringFormat='Moeilijkheid: {0:F0}'}"
+                       FontSize="16"
+                       TextColor="LightGray"
+                       Margin="0,-30,0,0"
+                       HorizontalOptions="Center"/>
+
+            <!-- Gepersonaliseerde vragen -->
+            <Label     Text="Gepersonaliseerde vragen gebruiken?"
+                       FontSize="16"
+                       FontAttributes="Bold"
+                       TextColor="White"/>
+            
+            <HorizontalStackLayout Spacing="20" HorizontalOptions="Center">
+                
+                <Button     Text="Ja"
+                            BackgroundColor="{Binding IsCustomQuestionsEnabled, Converter={StaticResource BoolToColorConverter}, ConverterParameter=true}"
+                            TextColor="White"
+                            Command="{Binding ToggleCustomQuestionsCommand}"
+                            WidthRequest="100"
+                            HeightRequest="40"
+                            CornerRadius="20"/>
+
+                <Button     Text="Nee"
+                            BackgroundColor="{Binding IsCustomQuestionsEnabled, Converter={StaticResource BoolToColorConverter}, ConverterParameter=false}"
+                            TextColor="White"
+                            Command="{Binding ToggleCustomQuestionsCommand}"
+                            WidthRequest="100"
+                            HeightRequest="40"
+                            CornerRadius="20"/> 
+            </HorizontalStackLayout>
+
+            <!-- Spelers -->
+            <Label     Text="Spelers:"
+                       FontSize="16"
+                       FontAttributes="Bold"
+                       TextColor="White"/>
+            
+            <Entry     Placeholder="Speler 1"
+                       Text="{Binding Player1}"
+                       BackgroundColor="MediumPurple"
+                       Margin="0,-5,0,0"/>
+            
+            <Entry     Placeholder="Speler 2"
+                       Text="{Binding Player2}"
+                       BackgroundColor="MediumPurple"
+                       Margin="0,-5,0,0"/>
+            
+            <Entry     Placeholder="Speler 3"
+                       Text="{Binding Player3}"
+                       BackgroundColor="MediumPurple"
+                       Margin="0,-5,0,0"/>
+            
+            <Entry     Placeholder="Speler 4"
+                       Text="{Binding Player4}"
+                       BackgroundColor="MediumPurple"
+                       Margin="0,-5,0,0"/>
+
+            <!-- Start knop -->
+            <Border     BackgroundColor="DodgerBlue"
+                        StrokeShape="RoundRectangle 10"
+                        Margin="0,0,0,0">
+                
+                <HorizontalStackLayout VerticalOptions="Center" Padding="10">
+                    <Label     Text="Start!"
+                               FontAttributes="Bold"
+                               FontSize="Large"
+                               TextColor="White"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center" 
+                               Padding="0,0,20,0"/>
+                    
+                    <Image     Source="arrow_forward_icon.png"
+                               WidthRequest="40"
+                               HeightRequest="30"
+                               HorizontalOptions="End"
+                               VerticalOptions="Center" />
+                </HorizontalStackLayout>
+                
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding StartGameCommand}" />
+                </Border.GestureRecognizers>
+                
+            </Border>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

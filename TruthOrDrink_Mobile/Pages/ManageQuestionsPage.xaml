@@ -1,13 +1,147 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:TruthOrDrink_Mobile.Pages"
              x:Class="TruthOrDrink_Mobile.Pages.ManageQuestionsPage"
-             Title="Vragen beheren">
-    <VerticalStackLayout>
-        <Label 
-            Text="Beheer je zelfgemaakte vragen hier!"
-            FontSize="24"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             Title="">
+
+    <ContentPage.Background>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+            <GradientStop Color="#2E005B" Offset="0.0" />
+            <GradientStop Color="#9B4EFF" Offset="1.0" />
+        </LinearGradientBrush>
+    </ContentPage.Background>
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15">
+
+            <!-- Titel en toolbar -->
+            <HorizontalStackLayout HorizontalOptions="FillAndExpand" VerticalOptions="Center">
+                <Label Text="Vragen beheren:"
+                       FontSize="25"
+                       FontAttributes="Bold"
+                       TextColor="White"
+                       HorizontalOptions="StartAndExpand" />
+                <ImageButton Source="plus.png"
+                             Command="{Binding ShowAddQuestionFormCommand}"
+                             HorizontalOptions="End"
+                             MaximumHeightRequest="70"
+                             MaximumWidthRequest="70"
+                             Margin="100,0,0,0"
+                             HeightRequest="30"
+                             WidthRequest="20" />
+            </HorizontalStackLayout>
+
+            <!-- Formulier voor nieuwe vraag -->
+            <StackLayout IsVisible="{Binding IsAddQuestionFormVisible}" Padding="10" BackgroundColor="#444444" Margin="0,10,0,10">
+                <Label Text="Nieuwe vraag toevoegen"
+                       FontSize="18"
+                       FontAttributes="Bold"
+                       TextColor="White" />
+                <Entry Placeholder="Vraagtekst"
+                       Text="{Binding NewQuestionText}"
+                       BackgroundColor="#FFFFFF"
+                       TextColor="Black"
+                       Margin="0,5" />
+                <Entry Placeholder="Categorie"
+                       Text="{Binding NewQuestionCategory}"
+                       BackgroundColor="#FFFFFF"
+                       TextColor="Black"
+                       Margin="0,5" />
+                <Picker Title="Gewaagdheid"
+                        SelectedItem="{Binding NewQuestionLevel}"
+                        BackgroundColor="#FFFFFF"
+                        TextColor="Black"
+                        Margin="0,5">
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:Int32}">
+                            <x:Int32>1</x:Int32>
+                            <x:Int32>2</x:Int32>
+                            <x:Int32>3</x:Int32>
+                            <x:Int32>4</x:Int32>
+                            <x:Int32>5</x:Int32>
+                        </x:Array>
+                    </Picker.ItemsSource>
+                </Picker>
+                <Button Text="Opslaan"
+                        Command="{Binding AddNewQuestionCommand}"
+                        BackgroundColor="#00BFFF"
+                        TextColor="White"
+                        CornerRadius="10"
+                        Margin="0,10" />
+            </StackLayout>
+
+            <!-- Lijst van vragen -->
+            <CollectionView ItemsSource="{Binding Questions}" Margin="0,10,0,0">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Padding="10" Margin="0,5" BackgroundColor="Grey">
+                            <!-- Grid-definitie: twee kolommen -->
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <!-- Tekst -->
+                                <ColumnDefinition Width="Auto" />
+                                <!-- Iconen -->
+                            </Grid.ColumnDefinitions>
+
+                            <!-- VerticalStackLayout voor de vraag-informatie -->
+                            <VerticalStackLayout Grid.Column="0">
+                                <Label FontSize="16" TextColor="White">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="Vraag: " FontAttributes="Bold" />
+                                            <Span Text="{Binding Text}" />
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                                <Label FontSize="14" TextColor="LightGray">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="Categorie: " FontAttributes="Bold" />
+                                            <Span Text="{Binding Category}" />
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                                <Label FontSize="14" TextColor="LightGray">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="Gewaagdheid: " FontAttributes="Bold" />
+                                            <Span Text="{Binding Level}" />
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                            </VerticalStackLayout>
+
+                            <!-- Iconen voor bewerken en verwijderen -->
+                            <VerticalStackLayout Grid.Column="1" VerticalOptions="End">
+                                <ImageButton Source="edit_icon.png"
+                                             Command="{Binding Source={RelativeSource AncestorType={x:Type local:ManageQuestionsViewModel}}, Path=ShowEditQuestionFormCommand}"
+                                             CommandParameter="{Binding}"
+                                             Margin="5,5,0,0"
+                                             MaximumHeightRequest="40"
+                                             WidthRequest="10" />
+                                <ImageButton Source="delete_icon.png"
+                                             Command="{Binding Source={RelativeSource AncestorType={x:Type local:ManageQuestionsViewModel}}, Path=DeleteQuestionCommand}"
+                                             CommandParameter="{Binding}"
+                                             Margin="5,5,0,0"
+                                             MaximumHeightRequest="40"
+                                             WidthRequest="10" />
+                            </VerticalStackLayout>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <!-- Opslaan knop -->
+            <!--<Button Text="Opslaan"
+                    Command="{Binding SaveQuestionsCommand}"
+                    BackgroundColor="#00BFFF"
+                    TextColor="White"
+                    FontSize="16"
+                    FontAttributes="Bold"
+                    CornerRadius="10"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="End" />-->
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

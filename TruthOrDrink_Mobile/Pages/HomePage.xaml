@@ -66,28 +66,6 @@
                 StrokeShape="RoundRectangle 10"
                 Margin="30,10,30,10">
             <HorizontalStackLayout VerticalOptions="Center" Padding="10">
-                <Label Text="Vragen toevoegen"
-                       FontAttributes="Bold"
-                       FontSize="Large"
-                       TextColor="White"
-                       HorizontalOptions="StartAndExpand"
-                       VerticalOptions="Center" 
-                       Padding="20,0,60,0"/>
-                <Image Source="arrow_forward_icon.png"
-                       WidthRequest="40"
-                       HeightRequest="30"
-                       HorizontalOptions="End"
-                       VerticalOptions="Center" />
-            </HorizontalStackLayout>
-            <Border.GestureRecognizers>
-                <TapGestureRecognizer Command="{Binding AddQuestionsCommand}" />
-            </Border.GestureRecognizers>
-        </Border>
-
-        <Border BackgroundColor="DodgerBlue"
-                StrokeShape="RoundRectangle 10"
-                Margin="30,10,30,10">
-            <HorizontalStackLayout VerticalOptions="Center" Padding="10">
                 <Label Text="Online spelen"
                        FontAttributes="Bold"
                        FontSize="Large"
