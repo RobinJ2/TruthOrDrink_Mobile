@@ -20,74 +20,100 @@
         </LinearGradientBrush>
     </ContentPage.Background>
 
-    <VerticalStackLayout Padding="0" Spacing="0">
-        <Border BackgroundColor="Transparent"
-                Stroke="#ADD8E6"
-                StrokeThickness="2"
-                StrokeShape="RoundRectangle 10"
-                Margin="30,0,30,20">
-            <Label Text="Truth Or Drink"
-               FontAttributes="Bold"
-               FontSize="38"
-               TextColor="White"
-               HorizontalTextAlignment="Center"
-               Padding="0,20,0,20"/>
-        </Border>
+    <ScrollView>
+        <VerticalStackLayout Padding="0" Spacing="0">
+            <!-- Titel -->
+            <Border BackgroundColor="Transparent"
+                    Stroke="#ADD8E6"
+                    StrokeThickness="2"
+                    StrokeShape="RoundRectangle 10"
+                    Margin="30,0,30,20">
+                <Label Text="Truth Or Drink"
+                   FontAttributes="Bold"
+                   FontSize="38"
+                   TextColor="White"
+                   HorizontalTextAlignment="Center"
+                   Padding="0,20,0,20"/>
+            </Border>
 
-        <Label Text="{Binding WelcomeMessage}"
-               FontSize="25"
-               HorizontalOptions="Center" 
-               TextColor="LightGreen"/>
+            <Label Text="{Binding WelcomeMessage}"
+                   FontSize="25"
+                   HorizontalOptions="Center" 
+                   TextColor="LightGreen"/>
 
-        <Border BackgroundColor="DodgerBlue"
-                StrokeShape="RoundRectangle 10"
-                Margin="30,30,30,10">
-            <HorizontalStackLayout VerticalOptions="Center" Padding="10">
-                <Label Text="Spel starten"
-                       FontAttributes="Bold"
-                       FontSize="Large"
-                       TextColor="White"
-                       HorizontalTextAlignment="Center"
-                       Padding="20,0,120,0"
-                       />
-                <Image Source="arrow_forward_icon.png"
-                       WidthRequest="40"
-                       HeightRequest="30"
-                       HorizontalOptions="CenterAndExpand"
-                       />
-            </HorizontalStackLayout>
-            <Border.GestureRecognizers>
-                <TapGestureRecognizer Command="{Binding StartGameCommand}" />
-            </Border.GestureRecognizers>
+            <!-- Buttons -->
+            <Border BackgroundColor="DodgerBlue"
+                    StrokeShape="RoundRectangle 10"
+                    Margin="30,30,30,10">
+                <HorizontalStackLayout VerticalOptions="Center" Padding="10">
+                    <Label Text="Spel starten"
+                           FontAttributes="Bold"
+                           FontSize="Large"
+                           TextColor="White"
+                           HorizontalTextAlignment="Center"
+                           Padding="20,0,120,0"
+                           />
+                    <Image Source="arrow_forward_icon.png"
+                           WidthRequest="40"
+                           HeightRequest="30"
+                           HorizontalOptions="CenterAndExpand"
+                           />
+                </HorizontalStackLayout>
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding StartGameCommand}" />
+                </Border.GestureRecognizers>
+            </Border>
 
-        </Border>
+            <Border BackgroundColor="DodgerBlue"
+                    StrokeShape="RoundRectangle 10"
+                    Margin="30,10,30,10">
+                <HorizontalStackLayout VerticalOptions="Center" Padding="10">
+                    <Label Text="Online spelen"
+                           FontAttributes="Bold"
+                           FontSize="Large"
+                           TextColor="White"
+                           HorizontalOptions="StartAndExpand"
+                           VerticalOptions="Center" 
+                           Padding="20,0,105,0"/>
+                    <Image Source="arrow_forward_icon.png"
+                           WidthRequest="40"
+                           HeightRequest="30"
+                           HorizontalOptions="End"
+                           VerticalOptions="Center" />
+                </HorizontalStackLayout>
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding PlayOnlineCommand}" />
+                </Border.GestureRecognizers>
+            </Border>
 
-        <Border BackgroundColor="DodgerBlue"
-                StrokeShape="RoundRectangle 10"
-                Margin="30,10,30,10">
-            <HorizontalStackLayout VerticalOptions="Center" Padding="10">
-                <Label Text="Online spelen"
-                       FontAttributes="Bold"
-                       FontSize="Large"
-                       TextColor="White"
-                       HorizontalOptions="StartAndExpand"
-                       VerticalOptions="Center" 
-                       Padding="20,0,105,0"/>
-                <Image Source="arrow_forward_icon.png"
-                       WidthRequest="40"
-                       HeightRequest="30"
-                       HorizontalOptions="End"
-                       VerticalOptions="Center" />
-            </HorizontalStackLayout>
-            <Border.GestureRecognizers>
-                <TapGestureRecognizer Command="{Binding PlayOnlineCommand}" />
-            </Border.GestureRecognizers>
-        </Border>
+            <Image Source="logo_truth_or_drink.png"
+               HeightRequest="850"
+               WidthRequest="850"
+               HorizontalOptions="Center"
+               Margin="0,-250,0,0" />
 
-        <Image Source="logo_truth_or_drink.png"
-           HeightRequest="850"
-           WidthRequest="850"
-           HorizontalOptions="Center"
-           Margin="0,-250,0,0" />
-    </VerticalStackLayout>
+
+            <Border BackgroundColor="BlueViolet"
+                    StrokeShape="RoundRectangle 10"
+                    Margin="0,-260,0,0">
+                <VerticalStackLayout>
+                    <!-- Geolocatie Titel -->
+                    <Label Text="Uw huidige geolocatie:"
+                           FontSize="18"
+                           FontAttributes="Bold"
+                           TextColor="White"
+                           HorizontalOptions="Center"
+                           Margin="10,10,10,5" />
+
+                    <!-- Geolocatie Label -->
+                    <Label Text="{Binding GeoLocation}"
+                           FontSize="16"
+                           TextColor="White"
+                           HorizontalOptions="Center"
+                           Margin="10,0,10,10" />
+                </VerticalStackLayout>
+            </Border>
+
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

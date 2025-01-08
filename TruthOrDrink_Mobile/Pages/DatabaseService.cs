@@ -57,7 +57,7 @@ namespace TruthOrDrink_Mobile.Pages
     }
 
     // Vraag Model
-    public class Question
+    public class   Question
     {
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }

@@ -51,6 +51,10 @@ namespace TruthOrDrink_Mobile.Pages
                 Shell.Current.FlyoutBehavior = FlyoutBehavior.Flyout;
                 (Application.Current.MainPage as AppShell)?.UpdateShellItems(true);
 
+                // Update de WelcomeMessage
+                var homeViewModel = Application.Current.MainPage.BindingContext as HomeViewModel;
+                homeViewModel?.UpdateWelcomeMessage();
+
                 await Shell.Current.GoToAsync("//HomePage");
             }
             catch (Exception ex)

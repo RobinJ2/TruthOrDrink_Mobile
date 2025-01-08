@@ -53,6 +53,9 @@
                            Margin="0,0,0,20"/>
                     <Button Text="Foto maken"
                             Command="{Binding TakePhotoCommand}" />
+                    <Button Text="Selecteer Foto"
+                            Command="{Binding PickPhotoCommand}" 
+                            Margin="0,10,0,0" />
                     <CollectionView ItemsSource="{Binding Photos}"
                                     Margin="10">
                         <CollectionView.ItemsLayout>
@@ -96,7 +99,7 @@
                    TextColor="LightSkyBlue"
                    FontAttributes="Bold"
                    HorizontalOptions="Center"
-                   Margin="0,50,0,0" />
+                   Margin="0,0,0,0" />
             <Border BackgroundColor="Transparent" Padding="15" StrokeShape="RoundRectangle 10">
                 <Label Text="{Binding CurrentQuote}" 
                    FontSize="16" 

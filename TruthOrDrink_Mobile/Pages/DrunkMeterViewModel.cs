@@ -184,6 +184,35 @@ namespace TruthOrDrink_Mobile.Pages
         //}
 
         [RelayCommand]
+        private async Task PickPhoto()
+        {
+            try
+            {
+                var result = await MediaPicker.PickPhotoAsync();
+                if (result != null)
+                {
+                    var photoPath = result.FullPath;
+
+                    var newPhoto = new Photo
+                    {
+                        FilePath = photoPath,
+                        Description = "Foto uit galerij"
+                    };
+
+                    // Voeg de geselecteerde foto toe aan de database en laad de lijst opnieuw
+                    await _databaseService.AddPhotoAsync(newPhoto);
+                    LoadPhotos();
+
+                    await Application.Current.MainPage.DisplayAlert("Foto geselecteerd", "Je foto is opgeslagen.", "OK");
+                }
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert("Fout", $"Kan geen foto selecteren: {ex.Message}", "OK");
+            }
+        }
+
+        [RelayCommand]
         public async Task DeletePhoto(Photo photo)
         {
             await _databaseService.DeletePhotoAsync(photo);
